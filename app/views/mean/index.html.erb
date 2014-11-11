@@ -1,0 +1,8 @@
+<%= form_tag(mean_update_path) do %>
+  <%= label_tag(:number, "Enter Number:") %>
+  <%= text_field_tag(:number) %>
+  <%= submit_tag("Calculate Mean") %>
+<% end %>
+<p>
+Mean is: <span id="mean"><%= @mean %> </span>.
+</p>

@@ -1,0 +1,2 @@
+module MeanHelper
+end

@@ -28,4 +28,10 @@ class MeanController < ApplicationController
     session[:numbers_looked_at] = (numbers_looked_at + 1)
     redirect_to mean_index_path
   end
+
+  def reset
+    session[:mean] = 0
+    session[:numbers_looked_at] = 0
+    redirect_to mean_index_path
+  end
 end

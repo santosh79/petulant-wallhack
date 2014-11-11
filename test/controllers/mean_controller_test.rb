@@ -1,11 +1,16 @@
 require 'test_helper'
 
 class MeanControllerTest < ActionController::TestCase
+  test "index - it should have a form for resetting the page" do
+    get :index
+    assert_response :success
+    assert_select "#reset_form"
+  end
 
   test "index - it should have a form for updating the mean" do
     get :index
     assert_response :success
-    assert_select "form"
+    assert_select "#update_form"
   end
 
   test "index - WITHOUT a previous mean calculated" do

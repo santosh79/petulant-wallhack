@@ -1,12 +1,6 @@
 require 'test_helper'
 
 class MeanControllerTest < ActionController::TestCase
-  test "index - it should have a form for resetting the page" do
-    get :index
-    assert_response :success
-    assert_select "#reset_form"
-  end
-
   test "index - it should have a form for updating the mean" do
     get :index
     assert_response :success
@@ -55,4 +49,20 @@ class MeanControllerTest < ActionController::TestCase
     assert_equal session[:numbers_looked_at], (numbers_looked_at + 1)
     assert_equal session[:mean], new_mean
   end
+
+  test "reseet - it resets the mean" do
+    session[:mean] = 100
+    session[:numbers_looked_at] = 1000
+    post :reset
+    assert_equal session[:mean], 0
+    assert_equal session[:numbers_looked_at], 0
+    assert_redirected_to mean_index_path
+  end
+
+  test "index - it should have a form for resetting the page" do
+    get :index
+    assert_response :success
+    assert_select "#reset_form"
+  end
+
 end

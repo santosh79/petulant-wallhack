@@ -34,6 +34,13 @@ class MeanControllerTest < ActionController::TestCase
     assert_equal session[:mean], number
   end
 
+  test "update with bad number" do
+    number = "bad_number"
+    post :update, :number => number
+    assert_equal flash[:notice], "Please enter a valid number"
+    assert_redirected_to mean_index_path
+  end
+
   test "update AFTER the FIRST time" do
     number = 100
     numbers_looked_at = 10

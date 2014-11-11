@@ -10,6 +10,12 @@ class MeanController < ApplicationController
   end
 
   def update
+    if invalid_number?
+      flash[:notice] = "Please enter a valid number"
+      redirect_to mean_index_path
+      return
+    end
+
     number = params[:number].to_i
 
     numbers_looked_at = session[:numbers_looked_at]
@@ -34,4 +40,11 @@ class MeanController < ApplicationController
     session[:numbers_looked_at] = 0
     redirect_to mean_index_path
   end
+
+  private
+  def invalid_number?
+    valid_number = params[:number] && (params[:number] =~ /\d+/)
+    not valid_number
+  end
+
 end
